@@ -1,0 +1,29 @@
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+interface SignalBadgeProps {
+  signal: 'BUY' | 'SELL' | 'HOLD';
+  className?: string;
+}
+
+export function SignalBadge({ signal, className }: SignalBadgeProps) {
+  const styles = {
+    BUY: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+    SELL: "bg-rose-500/10 text-rose-400 border-rose-500/20",
+    HOLD: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+  };
+
+  return (
+    <span className={cn(
+      "px-3 py-1 rounded-full text-xs font-semibold border",
+      styles[signal],
+      className
+    )}>
+      {signal}
+    </span>
+  );
+}
